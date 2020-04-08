@@ -79,7 +79,7 @@ public class GuestNumberTest {
         }
         else {
 
-            System.out.println("Wrong Input");
+            System.out.println("Wrong Input, Input again");
         }
     }
 
