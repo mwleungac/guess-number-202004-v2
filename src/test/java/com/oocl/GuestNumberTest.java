@@ -15,7 +15,7 @@ public class GuestNumberTest {
         int[] randomNumSet = new int[numOfNumbersInSet];
 
         for (int i = 0; i < 4; i++) {
-            randomNumSet[i] = (int)(Math.random()*10);
+            randomNumSet[i] = (int)(Math.random() * 10);
 
             for (int j = 0; j < i; j++) {
                 if (randomNumSet[i] == randomNumSet[j]) {
@@ -31,8 +31,8 @@ public class GuestNumberTest {
         int len = arr.length;
         return IntStream.range(0, len)
                 .filter(i -> t == arr[i])
-                .findFirst() // first occurrence
-                .orElse(-1); // No element found
+                .findFirst()
+                .orElse(-1);
     }
 
     @Test
@@ -40,19 +40,19 @@ public class GuestNumberTest {
 
         generateRandomNumbers();
 
+        int guessNumLength = 5;
         int[] randomNum = randomNumbers;
         int[] guessingNum = {1, 2, 3, 4};
         Integer correctNumbers = 0;
         Integer correctPositionAndNumber = 0;
 
-        if (guessingNum.length < 5) {
+        if (guessingNum.length < guessNumLength) {
 
             System.out.println("Generated Numbers : " + Arrays.toString(randomNum));
             System.out.println("Inputted Numbers : " + Arrays.toString(guessingNum));
 
             HashSet<Integer> set = new HashSet<Integer>();
             for (int i = 0; i < randomNum.length; i++) {
-
                 if (findIndex(randomNum, randomNum[i]) == findIndex(guessingNum, guessingNum[i])
                         && randomNum[i] == guessingNum[i]) {
                     correctPositionAndNumber = correctPositionAndNumber + 1;
