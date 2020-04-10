@@ -2,11 +2,21 @@ package com.oocl;
 
 import org.junit.Assert;
 import org.junit.Test;
+import java.util.Random;
 
 public class GuessNumTest {
 
+    public String randomNumbers = "";
+
+    public void generateRandom() {
+        Random random = new Random();
+        String randomNum = String.format("%04d", random.nextInt(10000));
+        randomNumbers = randomNum;
+    }
+
     @Test
     public void should_return_0A0B() {
+        generateRandom();
 
         String input = "1234";
         String answer = "5678";
@@ -16,7 +26,7 @@ public class GuessNumTest {
 
         Assert.assertEquals("0A0B", result);
     }
-
+    
     @Test
     public void should_return_1A0B() {
 
