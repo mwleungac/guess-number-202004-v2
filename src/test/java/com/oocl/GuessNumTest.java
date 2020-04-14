@@ -12,8 +12,7 @@ public class GuessNumTest {
 
     public void generateRandom() {
         Random random = new Random();
-        String randomNum = String.format("%04d", random.nextInt(10000));
-        randomNumbers = randomNum;
+        randomNumbers = String.format("%04d", random.nextInt(10000));
     }
 
     public static boolean checkIfDuplicate(String input) {
@@ -28,7 +27,7 @@ public class GuessNumTest {
     }
 
     public String errorMessageIfWrongInput(String input) {
-        if (input.length() != 4 || isDuplicate == true) {
+        if (input.length() != 4 || isDuplicate) {
             return "Wrong Input.";
         }
         return null;
