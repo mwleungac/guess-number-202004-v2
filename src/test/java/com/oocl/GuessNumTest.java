@@ -3,56 +3,36 @@ package com.oocl;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Random;
-
 public class GuessNumTest {
 
-    public String randomNumbers = "";
     public boolean isDuplicate = false;
-
-    public void generateRandom() {
-        Random random = new Random();
-        randomNumbers = String.format("%04d", random.nextInt(10000));
-    }
-
-    public static boolean checkIfDuplicate(String input) {
-        for (int i = 0; i < input.length(); i++) {
-            for (int j = i + 1; j < input.length(); j++) {
-                if (input.charAt(i) == input.charAt(j)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public String errorMessageIfWrongInput(String input) {
-        if (input.length() != 4 || isDuplicate) {
-            return "Wrong Input.";
-        }
-        return null;
-    }
 
     @Test
     public void should_return_error_if_wrong_input() {
         String input = "2234";
-        isDuplicate = checkIfDuplicate(input);
-        Assert.assertEquals("Wrong Input.", errorMessageIfWrongInput(input));
+
+        GuessNum guessNum = new GuessNum();
+        isDuplicate = guessNum.checkIfDuplicate(input);
+        Assert.assertEquals("Wrong Input.", guessNum.errorMessageIfWrongInput(input));
+    }
+
+    @Test
+    public void should_generate_4_digit_random_numbers() {
+
+        GuessNum guessNum = new GuessNum();
+        Assert.assertNotNull(guessNum.generateRandomNumbers());
     }
 
     @Test
     public void should_return_0A0B() {
-        generateRandom();
-
-        String input = "2234";
-        String answer = "5678";
 
         GuessNum guessNum = new GuessNum();
+        String input = "2234";
+        String answer = "5678";
         String result = guessNum.outputResult(input, answer);
 
         Assert.assertEquals("0A0B", result);
     }
-
 
     @Test
     public void should_return_1A0B() {
