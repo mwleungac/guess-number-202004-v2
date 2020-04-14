@@ -2,11 +2,13 @@ package com.oocl;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.util.Random;
 
 public class GuessNumTest {
 
     public String randomNumbers = "";
+    public boolean isDuplicate = false;
 
     public void generateRandom() {
         Random random = new Random();
@@ -14,19 +16,45 @@ public class GuessNumTest {
         randomNumbers = randomNum;
     }
 
+    public static boolean checkIfDuplicate(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j < input.length(); j++) {
+                if (input.charAt(i) == input.charAt(j)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public String errorMessageIfWrongInput(String input) {
+        if (input.length() != 4 || isDuplicate == true) {
+            return "Wrong Input.";
+        }
+        return null;
+    }
+
+    @Test
+    public void should_return_error_if_wrong_input() {
+        String input = "2234";
+        isDuplicate = checkIfDuplicate(input);
+        Assert.assertEquals("Wrong Input.", errorMessageIfWrongInput(input));
+    }
+
     @Test
     public void should_return_0A0B() {
         generateRandom();
 
-        String input = "1234";
+        String input = "2234";
         String answer = "5678";
 
         GuessNum guessNum = new GuessNum();
-        String result = guessNum.outputResult(input , answer);
+        String result = guessNum.outputResult(input, answer);
 
         Assert.assertEquals("0A0B", result);
     }
-    
+
+
     @Test
     public void should_return_1A0B() {
 
@@ -34,7 +62,7 @@ public class GuessNumTest {
         String answer = "1567";
 
         GuessNum guessNum = new GuessNum();
-        String result = guessNum.outputResult(input , answer);
+        String result = guessNum.outputResult(input, answer);
 
         Assert.assertEquals("1A0B", result);
     }
@@ -46,7 +74,7 @@ public class GuessNumTest {
         String answer = "2478";
 
         GuessNum guessNum = new GuessNum();
-        String result = guessNum.outputResult(input , answer);
+        String result = guessNum.outputResult(input, answer);
 
         Assert.assertEquals("0A2B", result);
     }
@@ -58,7 +86,7 @@ public class GuessNumTest {
         String answer = "0324";
 
         GuessNum guessNum = new GuessNum();
-        String result = guessNum.outputResult(input , answer);
+        String result = guessNum.outputResult(input, answer);
 
         Assert.assertEquals("1A2B", result);
     }
@@ -70,7 +98,7 @@ public class GuessNumTest {
         String answer = "4321";
 
         GuessNum guessNum = new GuessNum();
-        String result = guessNum.outputResult(input , answer);
+        String result = guessNum.outputResult(input, answer);
 
         Assert.assertEquals("0A4B", result);
     }
@@ -82,7 +110,7 @@ public class GuessNumTest {
         String answer = "1234";
 
         GuessNum guessNum = new GuessNum();
-        String result = guessNum.outputResult(input , answer);
+        String result = guessNum.outputResult(input, answer);
 
         Assert.assertEquals("4A0B", result);
     }
